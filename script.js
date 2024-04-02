@@ -180,7 +180,7 @@ let showYTData = () => {
 
     `;
 
-    div.style.overflow = "hidden";
+    // div.style.overflow = "hidden";
 
     // console.log(item);
     sceneRightMain.append(div);
@@ -446,6 +446,8 @@ const breathingApp = () => {
 
 // Start Breathing
 start.addEventListener("click", () => {
+  breathsLeft = numberOfBreaths.value;
+  breathsText.innerText = breathsLeft;
   if (breathsLeft <= 0) {
     return;
   }

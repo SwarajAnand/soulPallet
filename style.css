@@ -265,20 +265,21 @@
     padding: 20px;
     justify-content: space-around;
 }
+
 #yogaDataContainer{
     display: flex;
     flex-wrap: wrap;
-    /* padding: 100px; */
-    justify-content: space-around;
+    padding: 50px 100px;
+    justify-content: space-between;
     gap: 40px;
     /* border: 1px solid red; */
-    background-color: var(--skyLite);
+    background-color: rgba(88, 129, 241, 0.644);
 }
 
 .yogaDataDivs{
     background: rgba(255, 255, 255, 0.2);
     backdrop-filter: blur(10px);
-    height: 100%;
+    /* height: 100%; */
     width: 420px;
     text-align: center;
     align-items: center;
@@ -287,11 +288,15 @@
 }
 
 .yogaDataDivs img{
-    width: 75%;
-    height: 320px;
-    /* display: none; */
-    margin-bottom: 25px;
+    width: 70%;
+    height: 285px;
+    padding: 20px;
     border-radius: 50%;
+}
+
+.yogaDataDivs p{
+    /* line-height: 1.2; */
+    margin-top: 10px;
 }
 
 .yogaDataDivs img:hover{
@@ -300,14 +305,17 @@
 }
 
 .ytIframe{
-    border-radius: 20px;
-    overflow: hidden;
+    border-radius: 25px;
+    /* overflow: hidden; */
+    /* border: 1px solid red; */
+    margin-bottom: 10px;
 }
 
 .ytIframe:hover{
     transform: scale(1.05);
     transition: 0.5s ease;
-    overflow: hidden;
+    /* overflow: hidden; */
+    /* border-radius: 20px; */
 }
 
 #sceneRightMain h1{
@@ -358,6 +366,7 @@
     margin: auto;
     margin-top: 10%;
     width: 320px;
+    /* padding: -0px; */
 }
 
 .exitFullScreen{
@@ -378,10 +387,6 @@
     transition: 0.3s ease;
 }
 
-#focusRightMain #logo{
-    display: none !important;
-    color: red;
-}
 
 /* breathing  */
 .breathing-input {
@@ -392,7 +397,8 @@
   
   .breathing-label {
     text-align: center;
-    font-size: 18px;
+    font-size: 2.5rem;
+    padding: 10px;
     margin-bottom: 8px;
   }
   
@@ -400,12 +406,17 @@
     text-align: center;
     border: none;
     padding: 10px;
-    border-radius: 8px;
+    /* border-radius: 8px; */
     min-width: 300px;
     font-size: 20px;
     padding: 8px 4px;
-    background-color: #6236ff;
+    background-color: rgb(87, 86, 86);
     color: #fff;
+  }
+
+  .breathing-select *{
+    margin-top: 10px;
+    padding: 20px;
   }
   
   .breathing-select:focus {
@@ -434,7 +445,7 @@
     width: 50px;
     height: 50px;
     position: absolute;
-    background-color: #6236ff;
+    background-color: #000000;
     border-radius: 50%;
     transition: 4s ease all;
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
@@ -459,17 +470,18 @@
     padding: 15px 56px;
     margin-left: 44%;
     border-radius: 8px;
-    background-color: #6236ff;
+    background-color: #a1a1a1;
     color: #fff;
     border: none;
     cursor: pointer;
+    font-size: 17px;
     transition: 0.3s ease all;
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
   }
   
   .breathing-start:hover {
-    background-color: #f1f1f1;
-    color: #6236ff;
+    background-color: #2b2b2b;
+    color: #fff8f8;
   }
   
   .breathing-button-inactive {
@@ -484,6 +496,8 @@
     /* border: 1px solid red; */
     min-height: 98vh;
     position: relative;
+    display: flex;
+    flex-direction: column;
     /* max-width: 80vw; */
 }
 
@@ -500,39 +514,60 @@
     width: 90%;
     /* border: 1px solid red; */
     margin: auto;
-    height: 100%;
+    height: 80%;
 }
 
-.geminiInputContainers{
-    align-items: center;
-}
 
 #geminiInput{
-    width: 75%;
-    position: absolute;
-    bottom: 0%;
-    left: 40px;
+    width: 82%;
+    margin-left: 6%;
     border-radius: 10px;
 }
 
+.geminiInputContainers{
+    display: flex;
+}
+
+.textAreaHolder{
+    /* border: 1px solid red; */
+    width: 88%;
+}
+
+.geminiTwoButtonContainer{
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    /* border: 1px solid red; */
+    width: 20%;
+    /* padding: 20px; */
+}
 #geminiButton{
     background-color: #6236ff;
     color: #fff;
     height: 50px;
-    position: absolute;
-    bottom: 4%;
-    
-    right: 50px;
-    width: 150px;
+    width: 80%;
+    font-size: 1.4rem;
     border-radius: 10px;
     border: none;
+    cursor: pointer;
 }
 
 .mikeIcon{
-    height: 40px;
-    width: 40px;
-    position: absolute;
-    bottom: 4%;
+    height: 30px;
+    width: 30px;
+    background-color: #6236ff;
+    color: white;
+    border-radius: 50%;
+    padding: 15px;
+}
+
+#geminiButton:hover,
+.mikeIcon:hover{
+    cursor: pointer;
+    background-color: #3700ff;
+    transition: 0.5s ease;
 }
 
 textarea{
