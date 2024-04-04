@@ -3,8 +3,8 @@
 
 Hyy my name is Swaraj Anand, 👋 Welcome to our Soul Pallet! This project aims to provide users with a serene online environment for practicing yoga, meditation, and promoting mental well-being. and have some playing exercises for breathing and have a talk to hope Ai that works for you all day and night.
 
-## demo -> 
-    https://soulpallet.netlify.app/
+The page is live there -> [Hosted link](https://soulpallet.netlify.app/) 
+    
 
 ## Features:
 
