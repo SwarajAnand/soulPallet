@@ -5,7 +5,6 @@
     --mainBlack: #0B120B;
     --darkestGreen: #1D2A20;
     --lightGreen: #8675A9;
-
     --liteBackgroung: #F6F6F6;
     --midGreen: #364C37;
     --skyLite: #a9cadb;
@@ -526,6 +525,7 @@
 
 .geminiInputContainers{
     display: flex;
+    font
 }
 
 .textAreaHolder{
