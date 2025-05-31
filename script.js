@@ -333,40 +333,91 @@ hamBurger.addEventListener("click", () => {
   }
 });
 
-// Gemini
+function displayMessage(sender, text, isUser = false) {
+    let p = document.createElement("div");
+    p.classList.add("message-bubble");
+    p.classList.add(isUser ? "user-message" : "gemini-message");
+    p.innerHTML = `<strong>${sender}</strong>: ${text}`;
+    geminiContainer.appendChild(p);
+    geminiContainer.scrollTop = geminiContainer.scrollHeight;
+}
 
-import { GoogleGenerativeAI } from "@google/generative-ai";
-
-const API_KEY_Gem = "AIzaSyDuzmj3e6b9xeHJNfCyq6qTWwdD4xQaHMQ";
-const genAI = new GoogleGenerativeAI(API_KEY_Gem);
+function showLoading(show) {
+    let loadingDiv = document.getElementById("loadingIndicator");
+    if (!loadingDiv) {
+        loadingDiv = document.createElement("div");
+        loadingDiv.id = "loadingIndicator";
+        loadingDiv.classList.add("loading-indicator");
+        geminiContainer.appendChild(loadingDiv);
+    }
+    loadingDiv.style.display = show ? "block" : "none";
+    loadingDiv.textContent = show ? "HOPE is typing..." : "";
+    geminiContainer.scrollTop = geminiContainer.scrollHeight;
+}
 
 async function run(prompt) {
-  let p = document.createElement("p");
-  p.innerHTML = `<b>${userName}</b> : ${prompt}`;
-  geminiContainer.appendChild(p);
-  const model = genAI.getGenerativeModel({ model: "gemini-pro" });
-  const result = await model.generateContent(prompt);
-  const response = await result.response;
-  const text = await response.text();
-  let plainText = text
-    .replace(/\*\*(.*?)\*\*/g, "$1")
-    .replace(/\*(.*?)\*/g, "$1");
+    displayMessage(userName, prompt, true);
+    showLoading(true);
 
-  let p2 = document.createElement("pre");
-  p2.innerHTML = `<strong><b>HOPE</b></strong> : ${plainText}`;
-  geminiContainer.appendChild(p2);
-  // geminiContainer.innerHTML = text;
-  console.log(text);
+    const chatHistory = [];
+    chatHistory.push({ role: "user", parts: [{ text: prompt }] });
+
+    const payload = {
+        contents: chatHistory
+    };
+
+    const apiKey = "AIzaSyDuzmj3e6b9xeHJNfCyq6qTWwdD4xQaHMQ";
+    const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
+    try {
+        const response = await fetch(apiUrl, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+        });
+
+        const result = await response.json();
+
+        if (result.candidates && result.candidates.length > 0 &&
+            result.candidates[0].content && result.candidates[0].content.parts &&
+            result.candidates[0].content.parts.length > 0) {
+            const text = result.candidates[0].content.parts[0].text;
+
+            let plainText = text
+                .replace(/\*\*(.*?)\*\*/g, "$1")
+                .replace(/\*(.*?)\*/g, "$1");
+
+            displayMessage("HOPE", plainText);
+        } else {
+            displayMessage("HOPE", "Sorry, I couldn't get a response. Please try again.");
+            console.error("Unexpected API response structure:", result);
+        }
+    } catch (error) {
+        displayMessage("HOPE", "An error occurred while communicating with the API. Please check your connection or try again later.");
+        console.error("Fetch error:", error);
+    } finally {
+        showLoading(false);
+    }
 }
 
 console.log(geminiButton, geminiInput, geminiContainer);
 geminiButton.addEventListener("click", () => {
-  let prompt = geminiInput.value;
-  console.log(prompt);
-  run(prompt);
-  geminiInput.value = "";
+    let prompt = geminiInput.value.trim();
+    if (prompt) {
+        console.log(prompt);
+        run(prompt);
+        geminiInput.value = "";
+    }
 });
+
+geminiInput.addEventListener("keypress", (event) => {
+    if (event.key === "Enter") {
+        geminiButton.click();
+    }
+});
+
 geminiInput.value = "";
+
 
 function record() {
   var recognition = new webkitSpeechRecognition();
